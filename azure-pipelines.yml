@@ -6,10 +6,11 @@
 trigger:
 - '*'
 
+
 pool:
-  vmImage: 'ubuntu-18.04'
-  demands:
-    -npm
+  vmImage: 'ubuntu-lastest'
+  demands:  
+   -npm
 
 variables:
   buildConfiguration: 'Release'
@@ -17,14 +18,14 @@ variables:
 steps:
 - task: UseDotNet@2
   displayName: " Use .NET Core SDK 3.1.300"
-    inputs:
-        packageType: SDK
-        version: 3.1.300
+  inputs:
+    packageType: SDK
+    version: 3.1.300
 
 -task: Npm@1
  displayName: "Run nom install"
-    inputs:
-      verbose: false
+ inputs:
+   verbose: false
 
 -script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot' --output Tailspin.SpaceGame.Web/wwwroot'
  displayName: 'compile sass assets'
@@ -39,8 +40,8 @@ steps:
 -task: DotNetCoreCLI@2
  displayName: 'Restore projects Dependencies'
  inputs:
-      command: 'restore'
-      projects: '**/*.csproj'
+   command: 'restore'
+   projects: '**/*.csproj'
 
 -task: DotNetCoreCLI@2
  displayName: 'Build the Project - Release'
