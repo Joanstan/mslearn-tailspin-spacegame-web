@@ -16,35 +16,35 @@ variables:
 
 steps:
 - task: UseDotNet@2
-    displayName: " Use .NET Core SDK 3.1.300"
+  displayName: " Use .NET Core SDK 3.1.300"
     inputs:
         packageType: SDK
         version: 3.1.300
 
 -task: Npm@1
-    displayName: "Run nom install"
+ displayName: "Run nom install"
     inputs:
       verbose: false
 
 -script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot' --output Tailspin.SpaceGame.Web/wwwroot'
-      displayName: 'compile sass assets'
+ displayName: 'compile sass assets'
 
 -task: gulp@1
-      displayName: 'Run gulp tasks'
+ displayName: 'Run gulp tasks'
 
 -script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildInfo.txt'
-      displayName: 'Write build Info'
-      workingDirectory: Tailspin.SpaceGame.Web/wwwroot
+ displayName: 'Write build Info'
+ workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
 -task: DotNetCoreCLI@2
-      displayName: 'Restore projects Dependencies'
-      inputs:
-          command: 'restore'
-          projects: '**/*.csproj'
+ displayName: 'Restore projects Dependencies'
+ inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
 
 -task: DotNetCoreCLI@2
  displayName: 'Build the Project - Release'
  inputs: *
-        command: 'build'
-        arguments: '---no-restore --configuration Release'
-        projects: '**/*.csproj'
+    command: 'build'
+    arguments: '---no-restore --configuration Release'
+    projects: '**/*.csproj'
