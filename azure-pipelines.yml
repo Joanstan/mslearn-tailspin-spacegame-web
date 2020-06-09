@@ -6,7 +6,6 @@
 trigger:
 - '*'
 
-
 pool:
   vmImage: 'ubuntu-lastest'
   demands:  
@@ -27,8 +26,8 @@ steps:
   inputs:
    verbose: false
 
--script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot' --output Tailspin.SpaceGame.Web/wwwroot'
- displayName: 'compile sass assets'
+- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot' --output Tailspin.SpaceGame.Web/wwwroot'
+  displayName: 'compile sass assets'
 
 - task: gulp@1
   displayName: 'Run gulp tasks'
